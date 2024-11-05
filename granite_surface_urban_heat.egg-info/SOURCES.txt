@@ -1,9 +1,0 @@
-LICENSE
-README.md
-pyproject.toml
-granite_surface_urban_heat.egg-info/PKG-INFO
-granite_surface_urban_heat.egg-info/SOURCES.txt
-granite_surface_urban_heat.egg-info/dependency_links.txt
-granite_surface_urban_heat.egg-info/requires.txt
-granite_surface_urban_heat.egg-info/top_level.txt
-utils/__init__.py
