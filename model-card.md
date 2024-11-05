@@ -14,8 +14,6 @@ The granite-geospatial-land-surface-temperature model is a fine-tuned geospatial
 <img src="https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/assets/images/cities_map2.png?raw=true" width="800">
 </p>
 
-Please see [Model Description](model-description) below for more details.
-
 ## How to Get Started with the Model
 
 This model was trained using [Terratorch](https://github.com/IBM/terratorch).
