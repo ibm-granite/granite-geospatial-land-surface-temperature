@@ -1,0 +1,25 @@
+{
+    "workflow_type": "process-main",
+    "workflow_options": {
+        "cities":{
+            "buffer": 0.0,
+            "data_save_dir": "../data/processed_data/", 
+            "city_names": ["cape-town_zaf", "bengaluru_ind"]
+        },
+        "hls_processing":{
+            "hls_downloads": "../data/downloaded_data/hls/",
+            "cloud_percent" : 30.00,
+            "scale_hls_bands": false
+        },
+        "stack_patch":{
+            "era5_dir": "../data/downloaded_data/era5/",
+            "interpolation": false,
+            "patch_sizes": [224, 224],
+            "perc_nan": 30,
+            "output_files": "stacked-patches"
+        },
+        "compute":{
+            "max_threads": 10
+        }
+    }
+}

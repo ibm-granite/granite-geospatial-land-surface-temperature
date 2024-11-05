@@ -1,0 +1,48 @@
+aux_heads:
+- !!python/object:terratorch.models.model.AuxiliaryHead
+  decoder: IdentityDecoder
+  decoder_args:
+    head_channel_list:
+    - 1
+    head_dropout: 0.5
+    head_final_act: torch.nn.LazyLinear
+  name: aux_head
+aux_loss:
+  aux_head: 0.4
+class_weights: null
+freeze_backbone: false
+freeze_decoder: false
+ignore: null
+ignore_index: -9999
+loss: rmse
+lr: 0.001
+model_args:
+  backbone: prithvi_swin_L
+  backbone_drop_path_rate: 0.3
+  bands:
+  - BLUE
+  - GREEN
+  - RED
+  - NIR_NARROW
+  - SWIR_1
+  - SWIR_2
+  - 7
+  decoder: UperNetDecoder
+  decoder_channels: 256
+  img_size: 224
+  in_channels: 7
+  num_frames: 1
+  pretrained: false
+model_factory: PrithviModelFactory
+optimizer: null
+optimizer_hparams: null
+plot_on_val: 10
+scheduler: null
+scheduler_hparams: null
+tiled_inference_parameters: !!python/object:terratorch.tasks.tiled_inference.TiledInferenceParameters
+  average_patches: true
+  delta: null
+  h_crop: 224
+  h_stride: 224
+  w_crop: 224
+  w_stride: 224

@@ -1,0 +1,46 @@
+Metadata-Version: 2.1
+Name: granite-surface-urban-heat
+Version: 0.99.0
+Summary: Granite Surface Urban Heat Models
+Author-email: Muaaz Bhamjee <muaaz.bhamjee@ibm.com>, Tamara Rosemary Govindasamy <tamara.govindasamy@ibm.com>
+License: Apache License, Version 2.0
+Project-URL: Documentation, https://github.ibm.com/NIH-HE2AT/granite-geospatial-surface-urban-heat#readme
+Project-URL: Issues, https://github.ibm.com/NIH-HE2AT/granite-geospatial-surface-urban-heat/issues
+Project-URL: Source, https://github.ibm.com/NIH-HE2AT/granite-geospatial-surface-urban-heat
+Keywords: fine-tuning,geospatial foundation models,surface urban heat,uraban heat islands,earth observation foundation models,uhi,suhi
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: torch==2.1.0
+Requires-Dist: torchvision==0.16.0
+Requires-Dist: terratorch==0.99.3
+Requires-Dist: lightning-utilities==0.11.3.post
+Requires-Dist: albumentations==1.4.3
+Requires-Dist: huggingface_hub
+Requires-Dist: jupyter
+Requires-Dist: matplotlib
+Requires-Dist: pandas
+Requires-Dist: cdsapi
+Requires-Dist: fiona
+Requires-Dist: pandas
+Requires-Dist: pyproj
+Requires-Dist: pystac
+Requires-Dist: pystac_client
+Requires-Dist: rasterio
+Requires-Dist: rioxarray
+Requires-Dist: shapely
+Requires-Dist: scikit-learn
+Requires-Dist: xarray
+Requires-Dist: Ipython
+Requires-Dist: Path
+Requires-Dist: holoviews
+Requires-Dist: torchgeo==0.6.0
+Requires-Dist: albucore<=0.0.16
+Requires-Dist: torchmetrics==1.3.1
+Requires-Dist: geopandas>=0.14.2
+Requires-Dist: lightly>=1.4.25
+Requires-Dist: h5py>=3.10.0
+Requires-Dist: mlflow==2.14.3
+Requires-Dist: lightning[pytorch-extra]!=2.3.*,>=2
+
+# granite-geospatial-surface-urban-heat-

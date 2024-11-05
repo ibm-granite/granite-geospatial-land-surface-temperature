@@ -1,0 +1,162 @@
+data:
+  class_path: terratorch.datamodules.GenericNonGeoPixelwiseRegressionDataModule
+  init_args:
+    allow_substring_split_file: true
+    batch_size: 64
+    constant_scale: 1.0
+    dataset_bands:
+    - BLUE
+    - GREEN
+    - RED
+    - NIR_NARROW
+    - SWIR_1
+    - SWIR_2
+    - 7
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    drop_last: true
+    expand_temporal_dimension: false
+    ignore_split_file_extensions: true
+    img_grep: '*.inputs.tif'
+    label_grep: '*.lst.tif'
+    means:
+    - 702.4754028320312
+    - 1023.23291015625
+    - 1118.8924560546875
+    - 2440.750732421875
+    - 2052.705810546875
+    - 1514.15087890625
+    - 21.031919479370117
+    no_data_replace: 0.0
+    no_label_replace: -9999
+    num_workers: 8
+    output_bands:
+    - BLUE
+    - GREEN
+    - RED
+    - NIR_NARROW
+    - SWIR_1
+    - SWIR_2
+    - 7
+    predict_data_root: /dccstor/sarl_data/muaazb/granite-geospatial-surface-urban-heat-dataset/inputs
+    predict_dataset_bands:
+    - BLUE
+    - GREEN
+    - RED
+    - NIR_NARROW
+    - SWIR_1
+    - SWIR_2
+    - 7
+    reduce_zero_label: false
+    rgb_indices:
+    - 2
+    - 1
+    - 0
+    stds:
+    - 554.8255615234375
+    - 613.5565185546875
+    - 745.929443359375
+    - 715.0111083984375
+    - 761.47607421875
+    - 734.991943359375
+    - 8.66781997680664
+    test_data_root: test/inputs
+    test_label_data_root: test/targets
+    train_data_root: train/inputs
+    train_label_data_root: train/targets
+    train_transform:
+    - class_path: albumentations.HorizontalFlip
+      init_args:
+        always_apply: false
+        p: 0.5
+    - class_path: albumentations.Rotate
+      init_args:
+        always_apply: false
+        border_mode: 0
+        crop_border: false
+        interpolation: 1
+        limit: 30
+        mask_value: 1.0
+        p: 0.5
+        rotate_method: largest_box
+        value: 0.0
+    - class_path: albumentations.pytorch.ToTensorV2
+      init_args:
+        always_apply: true
+        p: 1.0
+        transpose_mask: false
+    val_data_root: val/inputs
+    val_label_data_root: val/targets
+deploy_config_file: true
+model:
+  class_path: terratorch.tasks.PixelwiseRegressionTask
+  init_args:
+    aux_heads:
+    - decoder: IdentityDecoder
+      decoder_args:
+        head_channel_list:
+        - 1
+        head_dropout: 0.5
+        head_final_act: torch.nn.LazyLinear
+      name: aux_head
+    aux_loss:
+      aux_head: 0.4
+    freeze_backbone: false
+    freeze_decoder: false
+    ignore_index: -9999
+    loss: rmse
+    lr: 0.001
+    model_args:
+      backbone: prithvi_swin_L
+      backbone_drop_path_rate: 0.3
+      bands:
+      - BLUE
+      - GREEN
+      - RED
+      - NIR_NARROW
+      - SWIR_1
+      - SWIR_2
+      - 7
+      decoder: UperNetDecoder
+      decoder_channels: 256
+      img_size: 224
+      in_channels: 7
+      num_frames: 1
+      pretrained: false
+    model_factory: PrithviModelFactory
+    plot_on_val: 10
+    tiled_inference_parameters:
+      average_patches: true
+      h_crop: 224
+      h_stride: 224
+      w_crop: 224
+      w_stride: 224
+out_dtype: float32
+predict_output_dir: /dccstor/sarl_data/muaazb/granite-surface-urban-heat/inference
+seed_everything: 0
+trainer:
+  accelerator: auto
+  accumulate_grad_batches: 1
+  barebones: false
+  check_val_every_n_epoch: 1
+  detect_anomaly: false
+  devices: auto
+  enable_checkpointing: true
+  fast_dev_run: false
+  inference_mode: true
+  log_every_n_steps: 10
+  logger: false
+  max_epochs: 600
+  max_steps: -1
+  num_nodes: 1
+  overfit_batches: 0.0
+  precision: 16-mixed
+  reload_dataloaders_every_n_epochs: 0
+  strategy: auto
+  sync_batchnorm: false
+  use_distributed_sampler: true

@@ -1,0 +1,22 @@
+{
+    "workflow_type": "download-hls-era5",
+    "workflow_options": {
+
+        "data_dir": "../data/downloaded_data/", 
+        
+        "data_collections": ["HLS_landsat", "ERA5_land"],
+
+        "hls_cloud_percent" : 30.00,
+
+        "city_iso_names": ["bengaluru_ind", "cape-town_zaf"],
+
+        "city_bbox_buffer": 0.00,
+
+        "start_date" : "2013-01-01",
+
+        "end_date" : "2014-01-31",
+        
+        "era5_climate_var" : ["2m_temperature"]
+
+    }
+}
