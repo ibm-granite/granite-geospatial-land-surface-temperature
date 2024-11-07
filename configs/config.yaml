@@ -35,7 +35,7 @@ out_dtype: float32
 data:
   class_path: GenericNonGeoPixelwiseRegressionDataModule
   init_args:
-    batch_size: 64
+    batch_size: 1
     num_workers: 8
     train_transform:
       - class_path: albumentations.HorizontalFlip
