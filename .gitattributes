@@ -1,2 +1,0 @@
-*.shp filter=lfs diff=lfs merge=lfs -text
-assets/databases/global_cities_oceanmask.shp filter=lfs diff=lfs merge=lfs -text
