@@ -22,38 +22,43 @@ matplotlib.rcParams['agg.path.chunksize'] = 10000
 
 
 def mae(pred, truth):
+
+    """
+    Function for calculating the mean absolute error (MAE) between the prediction and target.
+    Args:
+        pred: xarray.Dataset
+            An xarray dataset of the model prediction.
+        truth: xarray.Dataset
+            An xarray dataset of the ground truth.
+    """
+
     abs_diff = abs(pred-truth)
     mae = abs_diff.mean(dim=['x','y'], skipna=True)['band_data'].values[0]
     return mae
 
+def norm(arr1):
 
-def norm(array):
-   if np.nanmax(array) - np.nanmin(array) == 0:
-       return np.zeros_like(array)  # Avoid division by zero
-   return (array - np.nanmedian(array)) / np.nanstd(array)
+    """
+    Function for normalizing an array using histogram normaliztion.
+    Args:
+        arr1: numpy.ndarray()
+        An array that contains un-normalized data.
 
-
-def max_norm(array):
-    return (array) / (np.nanmax(array))
-
-def min_max(exp, pred_list, ds_pred, patch_exp_pred_paths):
-    min_ = []
-    max_ = []
+    Returns:
+        The normalized array.
     
-    for patch_exp_pred_path in patch_exp_pred_paths:
-        min_e = np.nanmin(np.squeeze(ds_pred['band_data'].values))
-        min_.append(min_e)
-        max_e = np.nanmax(np.squeeze(ds_pred['band_data'].values))
-        max_.append(max_e)
-
-    return min_, max_e
+    If np.nanmax(arr1) - np.nanmin(arr1) is 0:
+        Returns an array of zeros
+    """
+    if np.nanmax(arr1) - np.nanmin(arr1) == 0: 
+      return np.zeros_like(arr1)  # Avoid division by zero
+    return (arr1 - np.nanmedian(arr1)) / np.nanstd(arr1)
 
 def stack_rgb(stacked_inputs_path):
     """
     Extract, normalize and stack HLS bands corresponding to RGB image from stacked input file 
     Args:
-        stacked_inputs_path (str): Path to stacked input file
-        
+        stacked_inputs_path (str): Path to stacked input file        
     """
     with rasterio.open(stacked_inputs_path) as src:
         blue_band = src.read(1)
@@ -254,7 +259,7 @@ def plot_results(tile_name, inputs_path, targets_path, predictions_path):
 def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, inference_path, result_path, input_path, save_plot):
     """Plotting routine
         Args:
-            patches_tiles (list): List of input patches or tiles to generate comaprison plots for.
+            patches_tiles (list): List of input patches or tiles to generate comparison plots for.
             target_patches_path (str): Path to directory with geotiff target patches.
             inference_path (str): Path to directory where the geotiff predictions are saved.
             result_path (str): Path to directory where the result/comparison plots must be saved.
@@ -443,6 +448,10 @@ def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, infere
 
 
 def load_lst(pred_file):
+    """Loads lst prediction files and returns the prediction as a Dataset
+        Args:
+            pred_file (str): Full path to the geotiff of the lst prediction 
+    """
     try:
         with rasterio.open(pred_file) as src:
             lst_data = src.read(1)
@@ -454,7 +463,14 @@ def load_lst(pred_file):
         print(f"Error loading {pred_file}: {e}")
         return None
 
-def plot_rgb_and_lst(input_file, pred_files, minmax, output_file='Baltimore_summer_lst_animation.gif'):
+def plot_rgb_and_lst(input_file, pred_files, minmax, output_file):
+    """Plotting routine
+        Args:
+            input_file (list): List of input files (geotiffs) to generate animation.
+            pred_files (list): List of prediction files (geotiffs) to generate animation.
+            minmax (float):  Calculate the temporal min and max of the predictions using the analyze_rasters method
+            output_file (str): Animation output filename. Must use the .gif extension. 
+    """
     # Create a GridSpec for the layout
     fig = plt.figure(figsize=(12, 6))
     gs = gridspec.GridSpec(1, 3, width_ratios=[1, 1, 0.05])  # Three columns: RGB, LST, Colorbar
@@ -509,7 +525,10 @@ class RasterStats:
         self.global_max = global_max
 
 def get_rasters(pred_files):
-    """Get raster data from a list of predicted files."""
+    """Get raster data from a list of predicted files.
+        Args:
+            pred_files (list): List of prediction files (geotiffs) to generate animation.
+    """
     band_data = [] 
     for gtfp in pred_files:
         try:
@@ -521,7 +540,12 @@ def get_rasters(pred_files):
     return np.array(band_data)
 
 def calc_stats(band_data_all):
-    """Calculate the global minimum and maximum based on 5th and 95th percentiles."""
+    """Calculate the global minimum and maximum based on 5th and 95th percentiles.
+    Args:
+        band_data_all: numpy.ndarray()
+            An array that contains the data from all the prediction rasters
+
+    """
     if len(band_data_all.shape) == 3:
         band_data_all = np.expand_dims(band_data_all, axis=0)
 
@@ -533,7 +557,10 @@ def calc_stats(band_data_all):
     return global_min, global_max
 
 def analyze_rasters(inference_path):
-    """function to analyze rasters in the given inference path."""
+    """function to analyze rasters in the given inference path.
+    Args:
+        inference_path (str): Path to directory where the geotiff predictions are saved.
+    """
     pred_files = glob.glob(os.path.join(inference_path, "*_pred.tif"))
     pred_files = sorted(pred_files)  # Sort by date
 
