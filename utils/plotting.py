@@ -256,7 +256,7 @@ def plot_results(tile_name, inputs_path, targets_path, predictions_path):
 
     plt.show()
 
-def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, inference_path, result_path, input_path, save_plot):
+def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, inference_path, result_path, input_path, patch, save_plot):
     """Plotting routine
         Args:
             patches_tiles (list): List of input patches or tiles to generate comparison plots for.
@@ -264,6 +264,7 @@ def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, infere
             inference_path (str): Path to directory where the geotiff predictions are saved.
             result_path (str): Path to directory where the result/comparison plots must be saved.
             input_path (str): Path to directory with geotiff input patches.
+            patch (bool): For patches set to True. For tiles set to False.
             save_plot (bool): "True" will display and save the generated plots. "False" will only display the plots.s
     """
     
@@ -411,7 +412,7 @@ def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, infere
 
         #Plot the scatter density plot
         ax_sd = plt.subplot(gs[expi, 5])
-        ax_sd.scatter(target_line, pred_line, s=5)
+        ax_sd.scatter(target_line, pred_line, s=5, alpha=0.5)
         ax_sd.plot([vmin, vmax], [vmin, vmax], 'r-')
         ax_sd.set_xlim(vmin, vmax)
         ax_sd.set_ylim(vmin, vmax)
@@ -421,8 +422,16 @@ def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, infere
         ax_sd.set(xlabel=r'LST Obs [$\degree$ C]')
         ax_sd.set(ylabel=r'LST Pred [$\degree$ C]')
 
-        #Add a Title for the entire plot - effectively the patch information
-        fig.suptitle(f"City: {(os.path.basename(inp)).split('.')[0]}, Tile ID: {(os.path.basename(inp)).split('.')[1]}, Patch Index: {(os.path.basename(inp)).split('.')[2]}, Date: {(os.path.basename(inp)).split('.')[3]}, Time: {(os.path.basename(inp)).split('.')[4]}", y = 1.1)
+        # title
+        city_name = input_path.stem.split(".")[0]
+        if patch == False:
+            acq_date = input_path.stem.split(".")[2]
+            acq_time = input_path.stem.split(".")[3]
+        acq_date = input_path.stem.split(".")[3]
+        acq_time = input_path.stem.split(".")[4]
+        timestamp = datetime.strptime(acq_date+acq_time, "%Y%m%dT%H%M%S")
+        city_name = (city_name.split("_")[0]).upper() + f" ({(city_name.split('_')[1]).upper()})"
+        fig.suptitle(f"City: {city_name},  Date & Time: {timestamp.strftime('%Y-%m-%d %H:%M:%S')}\n", y=1.05, fontsize=12)
         # add colorbar for taget and prediction
         ax_cbar = plt.subplot(gs[expi+1, 1:3])
         #gs = gridspec.GridSpec(nexp+1, ncols, height_ratios=[1,0.5], width_ratios=[1,1,1,1,1])
@@ -543,7 +552,7 @@ def calc_stats(band_data_all):
     """Calculate the global minimum and maximum based on 5th and 95th percentiles.
     Args:
         band_data_all: numpy.ndarray()
-            An array that contains the data from all the prediction rasters
+            An array that contains the data from all the prediction rastersk
 
     """
     if len(band_data_all.shape) == 3:
