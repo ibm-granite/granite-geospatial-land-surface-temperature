@@ -7,6 +7,8 @@ for given cities of interest.
 # Import libraries
 ########################################################################
 
+import os
+import json
 from rasterio.enums import Resampling
 from shapely.geometry import box
 from shapely.ops import transform
@@ -20,8 +22,6 @@ import numpy as np
 import pyproj
 import pystac
 import pystac_client
-import json
-import os
 import requests
 import shutil
 import argparse
@@ -273,7 +273,7 @@ class utils:
                 
 
     @staticmethod
-    def download_era5(era5_download_path, list_cities, bbox_buffer, csv_path, era5_years, var):
+    def download_era5(era5_download_path, list_cities, bbox_buffer, csv_path, era5_years, era5_months, var):
 
         num_threads = 10
         manager = Manager()
@@ -304,11 +304,11 @@ class utils:
                         os.mkdir(os.path.join(era5_download_path, v))
                         logging.info('climate variable directory does not exist, creating.')
 
-                    # Check file   
-                    if os.path.isfile(os.path.join(era5_download_path, v, f"{city}.{year}.nc")):
-                        logging.info(f"ERA5 file for {city}.{year} exists. Skipping this download.")
-                    else: 
-                        params.append((city, city_lats, city_lons, era5_download_path, v, year, lock))
+                    # Check file - overwrite if new dates specified 
+                    #if os.path.isfile(os.path.join(era5_download_path, v, f"{city}.{year}.nc")):
+                    #    logging.info(f"ERA5 file for {city}.{year} exists. Skipping this download.")
+                    #else: 
+                    params.append((city, city_lats, city_lons, era5_download_path, v, year, era5_months, lock))
                         
             #### DOWNLOAD  WITH MULTIPROCESSING #####
             logging.info(f"Executing multiprocessing for {len(params)} ERA5 tasks for: {city}")
@@ -336,7 +336,7 @@ class utils:
                         failed_er_downloads.write("%s\n" % entry)
 
     @staticmethod
-    def cds_download(city, city_lats, city_lons, era5_download_path, var, year, lock):
+    def cds_download(city, city_lats, city_lons, era5_download_path, var, year, era5_months, lock):
 
         c = cdsapi.Client()
         file_name = os.path.join(era5_download_path, var, f"{city}.{year}.nc")
@@ -345,7 +345,7 @@ class utils:
             dataset = "reanalysis-era5-land"
             request = {'variable': [var],   
                         'year': year,
-                        'month': ['01', '02', '03', '04', '05','06', '07', '08', '09', '10', '11', '12'],
+                        'month': era5_months,
                         'day': [
                                 '01', '02', '03',
                                 '04', '05', '06',
@@ -367,6 +367,7 @@ class utils:
                                    '18:00', '19:00', '20:00',
                                    '21:00', '22:00', '23:00'],
                         'data_format': 'netcdf',
+                        'download_format': 'unarchived',
                             #bbox passed as a list [max_lat, min_lon, min_lat, max_lon]
                         'area': [
                                 city_lats[0], city_lons[0], city_lats[1], city_lons[1]]
