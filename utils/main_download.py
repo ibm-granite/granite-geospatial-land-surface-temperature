@@ -12,7 +12,7 @@ import os
 import argparse
 import sys
 import logging
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import pandas as pd
 
 # ------------- Set up logging ------------------------
@@ -72,13 +72,13 @@ def main():
     with open(configpath, "r") as json_file_config:
         input_params = json.load(json_file_config)
         workflow_options = input_params["workflow_options"]
-        data_collections = workflow_options["data_collections"]
+        data_collections = ["HLS_landsat", "ERA5_land"] # select both data collections
         percent = workflow_options["hls_cloud_percent"]
         start_date = workflow_options["start_date"]
         end_date = workflow_options["end_date"]
         list_cities = workflow_options["city_iso_names"]
         bbox_buffer = workflow_options["city_bbox_buffer"]
-        var = workflow_options["era5_climate_var"]
+        var = ["2m_temperature"]
         save_dir = workflow_options["data_dir"]
         csv_path = "../assets/databases/global_cities_database.csv"
 
@@ -116,9 +116,10 @@ def main():
                 ### DOWNLOAD ERA5
                 start_date = pd.to_datetime(start_date)
                 end_date = pd.to_datetime(end_date)
-                era5_years = [d for d in range(start_date.year, end_date.year + 1)]
+                era5_years = sorted(list(set(pd.date_range(start_date,end_date,freq='d').strftime('%Y').tolist())))
+                era5_months = sorted(list(set(pd.date_range(start_date,end_date,freq='d').strftime('%m').tolist())))
                 logging.info(f"Starting ERA5 Land downloads...")
-                utils.download_era5(era5_download_path, list_cities, bbox_buffer, csv_path, era5_years, var)
+                utils.download_era5(era5_download_path, list_cities, bbox_buffer, csv_path, era5_years, era5_months, var)
                 logging.info('Completed downloading ERA5 Land files.')
                 print(f"Completed downloading ERA5 Land files.")
 

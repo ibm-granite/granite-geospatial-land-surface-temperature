@@ -4,7 +4,7 @@
         "cities":{
             "buffer": 0.0,
             "data_save_dir": "../data/processed_data/", 
-            "city_names": ["cape-town_zaf", "bengaluru_ind"]
+            "city_names": ["bengaluru_ind"]
         },
         "hls_processing":{
             "hls_downloads": "../data/downloaded_data/hls/",
