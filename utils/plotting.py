@@ -423,12 +423,12 @@ def plot_rgb_lst_distribution_scatter(patches_tiles, target_patches_path, infere
         ax_sd.set(ylabel=r'LST Pred [$\degree$ C]')
 
         # title
-        city_name = input_path.stem.split(".")[0]
+        city_name = inp.split("/")[-1].split(".")[0]
         if patch == False:
-            acq_date = input_path.stem.split(".")[2]
-            acq_time = input_path.stem.split(".")[3]
-        acq_date = input_path.stem.split(".")[3]
-        acq_time = input_path.stem.split(".")[4]
+            acq_date = inp.split("/")[-1].split(".")[2]
+            acq_time = inp.split("/")[-1].split(".")[3]
+        acq_date = inp.split("/")[-1].split(".")[3]
+        acq_time = inp.split("/")[-1].split(".")[4]
         timestamp = datetime.strptime(acq_date+acq_time, "%Y%m%dT%H%M%S")
         city_name = (city_name.split("_")[0]).upper() + f" ({(city_name.split('_')[1]).upper()})"
         fig.suptitle(f"City: {city_name},  Date & Time: {timestamp.strftime('%Y-%m-%d %H:%M:%S')}\n", y=1.05, fontsize=12)
