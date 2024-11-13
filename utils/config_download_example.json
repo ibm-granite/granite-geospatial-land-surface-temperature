@@ -4,10 +4,10 @@
         "data_dir": "../data/downloaded_data/",
         "hls_cloud_percent": 30.0,
         "city_iso_names": [
-            "abeokuta_nga"
+            "begusarai_ind"
         ],
         "city_bbox_buffer": 0.0,
         "start_date": "2013-11-01",
-        "end_date": "2013-12-31"
+        "end_date": "2023-12-31"
     }
 }
