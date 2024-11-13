@@ -14,7 +14,7 @@ trainer:
     class_path: lightning.pytorch.loggers.csv_logs.CSVLogger
     init_args:
       save_dir: ./experiments
-      name: fine_tune_suhi
+      name: fine_tune_lst
   callbacks:
     - class_path: RichProgressBar
     - class_path: LearningRateMonitor
