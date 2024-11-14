@@ -28,6 +28,7 @@ import argparse
 import cdsapi
 import zipfile
 import calendar
+import ipywidgets as widgets
 import multiprocessing
 from multiprocessing import Pool, Manager
 
@@ -376,3 +377,23 @@ class utils:
         except:
             logging.info(f"Error: Unable to download ERA5 data for {city}: {year}: {var}. Please try again.")
     
+def write_config(city_iso_name, cc, s_date, e_date):
+    parameters = {
+    "data_dir" : "../data/downloaded_data/", # directory to save the data
+
+    "hls_cloud_percent" : float(cc),
+
+    "city_iso_names" : [city_iso_name],
+
+    "city_bbox_buffer" :  0.00,
+
+    "start_date" : str(s_date),
+
+    "end_date" : str(e_date)
+    }
+    city_download = {"workflow_type":"download-hls-era5", "workflow_options":parameters}
+
+    with open('../utils/config_download_example.json', 'w', encoding='utf-8') as f:
+        json.dump(city_download, f, ensure_ascii=False, indent=4)
+    
+    print("Example config file saved in /utils/")
