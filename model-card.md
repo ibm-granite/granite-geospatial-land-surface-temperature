@@ -37,7 +37,7 @@ For more details, check out the tutorials below which guide the user through the
 
 1. Check out the [Getting Started Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/1_getting_started.ipynb).
 
-2. For Tweening (Temporal Gap-Filling) check out the [Introuction to LST Tweening Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/2_introduction_to_LST_Tweening.ipynb) for a tutorial on how to implement Tweening and the [Tweening Data Preparation Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/3_tweening_data_preparation.ipynb) for a tutorial on preparing the data for Tweening.
+2. For Tweening (Temporal Gap-Filling) check out the [Introduction to LST Tweening Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/2_introduction_to_LST_Tweening.ipynb) for a tutorial on how to implement Tweening and the [Tweening Data Preparation Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/3_tweening_data_preparation.ipynb) for a tutorial on preparing the data for Tweening.
 
 3. For data download and data pre-processing to create your own dataset check out the [Download Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/4_download_data.ipynb) and the [Preprocessing Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/5_preprocess_data.ipynb).
 
