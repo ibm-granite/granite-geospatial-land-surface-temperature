@@ -39,7 +39,11 @@ from datetime import timedelta
 # Functions
 ########################################################################
 def create_data(path):
-    
+    """
+    Function to read in all geotiffs into xarray dataset
+    Args:
+        path (str): Path to directory with geotiff files
+    """
     tif_fps = sorted(glob.glob(os.path.join(path, '*.tif')))
     dataset_name = []
 
@@ -55,6 +59,13 @@ def create_data(path):
     return dataset_name
 
 def read_raster_data(input_pattern, band_index, timestamps):
+    """
+    Function to read individual bands of stacked input files
+    Args:
+        input_pattern (str): input_pattern for geotiff files
+        band_index (int): index of band to consider
+        timestamps (date-time obj): dates to consider
+    """
     raster_files = sorted(glob.glob(input_pattern))
     data_arrays = []
     

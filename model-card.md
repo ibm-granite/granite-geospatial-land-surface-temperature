@@ -37,9 +37,9 @@ For more details, check out the tutorials below which guide the user through the
 
 1. Check out the [Getting Started Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/1_getting_started.ipynb).
 
-2. For data download and data pre-processing to create your own dataset check out the [Download Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/2_download_data.ipynb) and the [Preprocessing Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/3_preprocess_data.ipynb).
+2. For Tweening (Temporal Gap-Filling) check out the [Introuction to LST Tweening Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/2_introduction_to_LST_Tweening.ipynb) for a tutorial on how to implement Tweening and the [Tweening Data Preparation Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/3_tweening_data_preparation.ipynb) for a tutorial on preparing the data for Tweening.
 
-3. For Tweening (Temporal Gap-Filling) check out the [Introuction to LST Tweening Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/4_introduction_to_LST_Tweening.ipynb) for a tutorial on how to implement Tweening and the [Tweening Data Preparation Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/5_tweening_data_preparation.ipynb) for a tutorial on preparing the data for Tweening.
+3. For data download and data pre-processing to create your own dataset check out the [Download Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/4_download_data.ipynb) and the [Preprocessing Notebook!](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/5_preprocess_data.ipynb).
 
 ## Model Description
 
@@ -53,7 +53,7 @@ More details on the base foundation model can be found in this [paper](https://a
 We present an application of the granite-geospatial-land-surface-temperature model for temporal gap filling (“Tweening” or in betweening). This approach attempts to solve for the temporal limitations in LST observations by synthesizing hourly inputs of stacked HLS and ERA5 temperature statistics. 
 
 For more details on this approach, refer to:
-- [Introduction to LST Tweening](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/4_introduction_to_LST_Tweening.ipynb)
+- [Introduction to LST Tweening](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/2_introduction_to_LST_Tweening.ipynb)
 
 ## Model Releases (along with the branch name where the models are stored):
 
@@ -83,9 +83,9 @@ For fine-tuning, the model requires stacked input patches of size 224 x 224, whi
 
 For more details on the download and preprocessing pipelines used to produce the fine-tuning and inference datasets, please refer to:
 
-- [Download](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/2_download_data.ipynb)
+- [Download](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/4_download_data.ipynb)
 
-- [Preprocessing](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/3_preprocess_data.ipynb)
+- [Preprocessing](https://github.com/ibm-granite/granite-geospatial-land-surface-temperature/blob/main/notebooks/5_preprocess_data.ipynb)
 
 ## Model Card Authors
 
