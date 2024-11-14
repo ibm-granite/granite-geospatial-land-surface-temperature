@@ -2,12 +2,12 @@
     "workflow_type": "download-hls-era5",
     "workflow_options": {
         "data_dir": "../data/downloaded_data/",
-        "hls_cloud_percent": 20.0,
+        "hls_cloud_percent": 30.0,
         "city_iso_names": [
-            "johannesburg_zaf"
+            "abu-dhabi_are"
         ],
         "city_bbox_buffer": 0.0,
-        "start_date": "2024-10-01",
-        "end_date": "2024-10-31"
+        "start_date": "2024-06-01",
+        "end_date": "2024-06-30"
     }
 }
