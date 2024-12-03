@@ -137,27 +137,26 @@ def duplicate_hls_bands(save_file, hls_date, tweening_period, data_directory, ci
         num_bands = min(6, src.count)  # ensure 6 hls bands and 4 hls indices
         image = np.array([src.read(b + 1).astype(np.float32) for b in range(num_bands)])
         profile = src.profile
-        
         profile.update(count=num_bands)
-
         year = int(hls_date[0:4])
         month = int(hls_date[4:6])
         day = int(hls_date[6:8])
+        date = datetime(year, month, day)
+        end_date = date+timedelta(days=tweening_period-1)
+        daterange = pd.date_range(date, end_date)
         base_time = "000000"
         num_files = [range(24*tweening_period)]
         with tqdm(total=len(num_files), leave=True) as pbar:
             for x in num_files:
-                for months in range(month, month+1):
-                    for days in range(day, day + tweening_period):
-                        date = datetime(year, month, days)  
-                        time = base_time[0:4]
-                        for hour in range(24):  
-                            tif = f'{data_directory}{city_iso}.{tile_id}.{date.strftime("%Y%m%d")}.T{hour:02d}{time}.input_file.tif'
-                            #print(f'Processing {tif}')  
-                            with rs.open(tif, 'w', **profile) as dst:
-                                for b in range(num_bands):
-                                    dst.write(image[b], b + 1)
-                            pbar.update(1)
+                for single_date in daterange:
+                    time = base_time[0:4]
+                    for hour in range(24):  
+                        tif = f'{data_directory}{city_iso}.{tile_id}.{single_date.strftime("%Y%m%d")}.T{hour:02d}{time}.input_file.tif'
+                        #print(f'Processing {tif}')  
+                        with rs.open(tif, 'w', **profile) as dst:
+                            for b in range(num_bands):
+                                dst.write(image[b], b + 1)
+                        pbar.update(1)
                                
                             
 
