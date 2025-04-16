@@ -1101,7 +1101,7 @@ class parallel_patching:
 
                     input_bands_fn = os.path.join(
                         patched_inputs_dir,
-                        f"{city_name}.{tile_id}.index_{num_image_rows*i+j}"
+                        f"{city_name}.{tile_id}.index_{i}_{j}"
                         + f"_{x_size}.{date}.{time_updated}.inputs.tif",
                     )
                     input_bands = bands_patch.sel(band=slice(1, 14))
@@ -1113,7 +1113,7 @@ class parallel_patching:
                     # write bands_tile to geotiff
                     output_bands_fn = os.path.join(
                         patched_targets_dir,
-                        f"{city_name}.{tile_id}.index_{num_image_rows*i+j}"
+                        f"{city_name}.{tile_id}.index_{i}_{j}"
                         + f"_{x_size}.{date}.{time_updated}.lst.tif",
                     )
                     output_bands = bands_patch.sel(band=15, method="nearest")
