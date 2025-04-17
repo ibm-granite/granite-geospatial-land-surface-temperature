@@ -14,7 +14,7 @@ authors = [
 dependencies = [
   "torch==2.1.0",
   "torchvision==0.16.0",
-  "terratorch==1.0",
+  "terratorch==0.99.9",
   "lightning-utilities==0.11.3.post",
   "albumentations==1.4.6",
   "huggingface_hub",
