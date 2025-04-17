@@ -41,9 +41,9 @@ dependencies = [
   "albucore<=0.0.16",
   "torchmetrics",
   "geopandas>=0.14.2",
-  "lightly>=1.4.25",
-  "h5py>=3.10.0",
-  "mlflow==2.14.3",
+  "lightly",
+  "h5py",
+  "mlflow",
 # broken due to https://github.com/Lightning-AI/pytorch-lightning/issues/19977
   "lightning[pytorch-extra]>=2,!=2.3.*",
 ]
