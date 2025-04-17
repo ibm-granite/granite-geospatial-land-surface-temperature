@@ -12,8 +12,8 @@ authors = [
 ]
 
 dependencies = [
-  "torch==2.6.0",
-  "torchvision==0.21.0",
+  "torch",
+  "torchvision",
   "terratorch==0.99.9",
   "lightning-utilities==0.11.3.post",
   "albumentations==1.4.6",
@@ -37,9 +37,9 @@ dependencies = [
   "Ipython",
   "Path",
   "holoviews",
-  "torchgeo==0.6.0",
+  "torchgeo",
   "albucore<=0.0.16",
-  "torchmetrics==1.6.2",
+  "torchmetrics",
   "geopandas>=0.14.2",
   "lightly>=1.4.25",
   "h5py>=3.10.0",
