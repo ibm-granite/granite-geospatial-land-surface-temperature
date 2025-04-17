@@ -128,7 +128,7 @@ model:
       decoder: UperNetDecoder
       pretrained: false
       backbone: prithvi_swin_L
-      img_size: 224
+      #img_size: 224
       backbone_drop_path_rate: 0.3
       decoder_channels: 256
       in_channels: 7
