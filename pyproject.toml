@@ -33,7 +33,7 @@ dependencies = [
   "rioxarray",
   "shapely",
   "scikit-learn",
-  "xarray==2024.3.0",
+  "xarray==2024.7.0",
   "Ipython",
   "Path",
   "holoviews",
