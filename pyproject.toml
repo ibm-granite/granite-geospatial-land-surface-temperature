@@ -30,7 +30,7 @@ dependencies = [
   "pystac",
   "pystac_client",
   "rasterio",
-  "rioxarray==0.17.0",
+  "rioxarray==0.18.2",
   "shapely",
   "scikit-learn",
   "xarray==2024.3.0",
